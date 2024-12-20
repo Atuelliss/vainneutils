@@ -1,6 +1,0 @@
-{
-    "name": "ChooseReact",
-    "description": "Simple command that lets a user select a message, a reaction, and a number of random folks to be selected.",
-    "author": ["Vainne"],
-    "requirements": []
-}
