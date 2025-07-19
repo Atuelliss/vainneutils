@@ -383,3 +383,37 @@ class Admin(MixinMeta):
         await ctx.send(f"{user.display_name} has been unbanned from hosting events.")
         # Save the changes
         self.save()
+
+    @pevent.command(name="help")
+    async def explain_pevent_process(self, ctx: commands.Context):
+        """Command to explain the event process."""
+        embed = discord.Embed(
+            title="Event How-To:",
+            description=("```\n"
+                        "1 - Player and Staff member begin discussion about Event.\n"
+                        "\n"
+                        "2 - Player explains their event, has all prerequisite information, "
+                        "and alotted discord-bank currency as deposit.\n"
+                        "\n"
+                        "3 - Admin uses `pevent allow (user)`. This allows the Player to make "
+                        "a deposit, and adds a +1 to their setup tally.\n"
+                        "\n"
+                        "4 - Player uses `pdeposit` by itself, it will then deduct the deposit.\n"
+                        "\n"
+                        "5 - Staff Member makes the Announcement or Calendar post, gets any "
+                        "needed in-game admin commands ready.\n"
+                        "\n"
+                        "6 - If Player-Host cancels then Staff uses `pevent cancel (user)` and "
+                        "follows the prompts. If user gave ample notice(24hours+) then make "
+                        "appropriate selection as well as refund. If not, say no and no refund.\n"
+                        "\n"
+                        "7 - Event date and time arrive, Player hosts their event. Once completed "
+                        "Staff monitors chat and verifies at least 2 participants were involved.\n"
+                        "\n"
+                        "8 - Staff member then uses `pevent complete (user)` and then makes a selection of successful or not. "
+                        "Player is refunded their deposit and tallies are made to the appropriate fields.\n"
+                        "```"),
+            color=discord.Color.green()
+        )
+        
+        await ctx.send(embed=embed)
