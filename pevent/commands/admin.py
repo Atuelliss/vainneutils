@@ -252,8 +252,8 @@ class Admin(MixinMeta):
         # Set User's can_make_deposit to False
         user_data.can_make_deposit = False
         # Ask author if Success and update accordingly
-        await ctx.send(f"Event for {user.display_name} marked as complete and deposit has been removed. Do you want to mark it as successful? (yes/no)")
-
+        await ctx.send(f"Event for {user.display_name} marked as complete and deposit has been refunded. Do you want to mark it as successful? (yes/no)")
+        
         def check(message):
             return message.author == ctx.author and message.channel == ctx.channel
 
@@ -264,6 +264,12 @@ class Admin(MixinMeta):
             if response_text.lower() in ["yes", "y"]:
                 user_data.user_total_success += 1
                 await ctx.send(f"Event for {user.display_name} marked as successful.")
+                # Refund the deposit
+                try:
+                    await bank.deposit_credits(user, self.db.deposit_value)
+                    await ctx.send(f"Refunded {self.db.deposit_value} to {user.display_name}.")
+                except Exception as e:
+                    await ctx.send(f"Failed to refund deposit: {e}")
             else:
                 await ctx.send(f"Event for {user.display_name} not marked as successful.")
 
