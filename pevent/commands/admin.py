@@ -333,6 +333,7 @@ class Admin(MixinMeta):
                     await ctx.send(f"Failed to refund deposit: {e}")
             else:
                 user_data.user_total_cancelled_withoutnotice += 1
+                user_data.has_active_deposit = False
                 await ctx.send(f"Event for {user.display_name} marked as cancelled without notice.")
 
         except asyncio.TimeoutError:
