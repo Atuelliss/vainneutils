@@ -9,13 +9,12 @@ from redbot.core.data_manager import cog_data_path
 from .abc import CompositeMetaClass
 from .commands import Commands
 from .common.models import DB
-from .listeners import Listeners
 from .tasks import TaskLoops
 
 log = logging.getLogger("red.pevent")
 
 
-class PEvent(Commands, Listeners, TaskLoops, commands.Cog, metaclass=CompositeMetaClass):
+class PEvent(Commands, TaskLoops, commands.Cog, metaclass=CompositeMetaClass):
     """Description"""
 
     __author__ = "author name"
