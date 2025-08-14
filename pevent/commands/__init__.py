@@ -12,5 +12,7 @@ class Commands(Admin, User, metaclass=CompositeMetaClass):
         if isinstance(error, commands.MemberNotFound):
             await ctx.send("That user is no longer in this Server.")
             return
+        if isinstance(error, commands.CommandNotFound):
+            return
         # Let other errors propagate normally
         raise error
